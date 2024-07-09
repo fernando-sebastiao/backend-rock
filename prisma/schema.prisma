@@ -20,5 +20,3 @@ model Trip {
 
   @@map("trips")
 }
-
-
