@@ -1,8 +1,14 @@
 import fastify from "fastify";
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
 import { createTrip } from "./routes/create-trip";
 
 const app = fastify();
 
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 app.get("/teste", () => {
   return "Hello World, NLW";
 });
