@@ -8,7 +8,9 @@ import { confirmTrip } from "./routes/confirm-trip";
 import { createTrip } from "./routes/create-trip";
 const app = fastify();
 
-app.register(cors, {});
+app.register(cors, {
+  origin: "*",
+});
 app.register(confirmTrip);
 
 app.setValidatorCompiler(validatorCompiler);
