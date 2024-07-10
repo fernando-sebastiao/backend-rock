@@ -78,7 +78,7 @@ export async function createTrip(app: FastifyInstance) {
       });
 
       const formateStartDate = dayjs(starts_at).format("LL");
-      const formateEndDate = dayjs(starts_at).format("LL");
+      const formateEndDate = dayjs(ends_at).format("LL");
 
       const confirmatioLink = `http://localhost:3333/trips/${trip.id}/confirm`;
 
