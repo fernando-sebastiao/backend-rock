@@ -10,6 +10,7 @@ import { createActivity } from "./routes/create-activity";
 import { createLink } from "./routes/create-link";
 import { createTrip } from "./routes/create-trip";
 import { getActivities } from "./routes/get-activity";
+import { getLinks } from "./routes/get-links";
 const app = fastify();
 
 app.register(cors, {
@@ -22,6 +23,7 @@ app.register(createTrip);
 app.register(createActivity);
 app.register(getActivities);
 app.register(createLink);
+app.register(getLinks);
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
