@@ -8,15 +8,18 @@ import { confirmParticipant } from "./routes/confirm-participant";
 import { confirmTrip } from "./routes/confirm-trip";
 import { createActivity } from "./routes/create-activity";
 import { createTrip } from "./routes/create-trip";
+import { getActivities } from "./routes/get-activity";
 const app = fastify();
 
 app.register(cors, {
   origin: "*",
 });
+
 app.register(confirmTrip);
 app.register(confirmParticipant);
 app.register(createTrip);
 app.register(createActivity);
+app.register(getActivities);
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
