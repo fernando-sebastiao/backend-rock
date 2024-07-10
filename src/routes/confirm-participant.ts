@@ -43,3 +43,4 @@ export async function confirmParticipant(app: FastifyInstance) {
     }
   );
 }
+//done
