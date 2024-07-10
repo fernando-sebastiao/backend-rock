@@ -4,6 +4,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
+import { confirmParticipant } from "./routes/confirm-participant";
 import { confirmTrip } from "./routes/confirm-trip";
 import { createTrip } from "./routes/create-trip";
 const app = fastify();
@@ -12,6 +13,8 @@ app.register(cors, {
   origin: "*",
 });
 app.register(confirmTrip);
+app.register(confirmParticipant);
+app.register(createTrip);
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
@@ -22,7 +25,6 @@ app.get("/teste", () => {
 app.get("/", () => {
   return { hello: "server running on fastify 🐱‍🏍" };
 });
-app.register(createTrip);
 app.listen({ port: 3333 }).then(() => {
   console.log("HTTP server running!");
 });

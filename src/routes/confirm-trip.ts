@@ -51,7 +51,7 @@ export async function confirmTrip(app: FastifyInstance) {
 
       await Promise.all(
         trip.pacticipants.map(async (participant) => {
-          const confirmatioLink = `http://localhost:3333/trips/${trip.id}/confirm/${participant.id}`;
+          const confirmatioLink = `http://localhost:3333/participants/${participant.id}/confirm`;
           const message = await mail.sendMail({
             from: {
               name: "Equipe plann.er",
@@ -75,7 +75,7 @@ export async function confirmTrip(app: FastifyInstance) {
         })
       );
 
-      return replay.redirect(`http://localhost:3000/trips/${trip.id}`);
+      return replay.redirect(`http://localhost:3000/trips/${tripId}`);
     }
   );
 }
