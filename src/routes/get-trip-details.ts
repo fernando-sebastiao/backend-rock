@@ -13,7 +13,7 @@ dayjs.extend(localizedFormat);
 
 export async function getTripsDetails(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    "/trips/:tripId/links",
+    "/trips/:tripId",
     {
       schema: {
         params: z.object({
@@ -28,14 +28,18 @@ export async function getTripsDetails(app: FastifyInstance) {
         where: {
           id: tripId,
         },
-        include: {
-          links: true,
+        select: {
+          id: true,
+          destination: true,
+          starts_at: true,
+          ends_at: true,
         },
       });
       if (!trip) {
         throw new Error("Trip not found");
       }
-      return { links: trip.links };
+
+      return { trip };
     }
   );
 }
