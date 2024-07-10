@@ -6,6 +6,7 @@ import {
 } from "fastify-type-provider-zod";
 import { confirmParticipant } from "./routes/confirm-participant";
 import { confirmTrip } from "./routes/confirm-trip";
+import { createActivity } from "./routes/create-activity";
 import { createTrip } from "./routes/create-trip";
 const app = fastify();
 
@@ -15,6 +16,7 @@ app.register(cors, {
 app.register(confirmTrip);
 app.register(confirmParticipant);
 app.register(createTrip);
+app.register(createActivity);
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
