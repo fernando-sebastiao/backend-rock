@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { ZodError } from "zod";
-import { ClientError } from "./src/error/client-error";
+import { ClientError } from "./error/client-error";
 type FastifyErrorHandler = FastifyInstance["errorHandler"];
 export const errorHandler: FastifyErrorHandler = (error, request, replay) => {
   console.log(error);

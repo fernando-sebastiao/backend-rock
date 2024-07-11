@@ -4,7 +4,8 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
-import { errorHandler } from "../error-handler";
+import { env } from "./env";
+import { errorHandler } from "./error-handler";
 import { confirmParticipant } from "./routes/confirm-participant";
 import { confirmTrip } from "./routes/confirm-trip";
 import { createActivity } from "./routes/create-activity";
@@ -43,12 +44,12 @@ app.register(getParticipant);
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.get("/teste", () => {
+app.get("/test", () => {
   return "Hello World, NLW";
 });
 app.get("/", () => {
   return { hello: "server running on fastify 🐱‍🏍" };
 });
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: env.PORT }).then(() => {
   console.log("HTTP server running!");
 });

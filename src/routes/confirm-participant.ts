@@ -2,6 +2,7 @@ import "dayjs/locale/pt-br";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
+import { env } from "../env";
 import { ClientError } from "../error/client-error";
 import { prisma } from "../lib/prisma";
 
@@ -29,7 +30,7 @@ export async function confirmParticipant(app: FastifyInstance) {
       }
       if (participants.is_confirmed) {
         return replay.redirect(
-          `https://localhost:3000/trips/${participants.trip_id}`
+          `${env.WEB_BASE_URL}/trips/${participants.trip_id}`
         );
       }
 
@@ -39,7 +40,7 @@ export async function confirmParticipant(app: FastifyInstance) {
       });
 
       return replay.redirect(
-        `http://localhost:3000/trips/${participants.trip_id}`
+        `${env.WEB_BASE_URL}/trips/${participants.trip_id}`
       );
     }
   );
