@@ -20,12 +20,14 @@ export async function createTrip(app: FastifyInstance) {
       schema: {
         body: z.object({
           destination: z
-            .string()
+            .string({ required_error: "Destination is required" })
             .min(4, { message: "Destination must have at least 4 characters" }),
           starts_at: z.coerce.date(),
           ends_at: z.coerce.date(),
-          owner_name: z.string(),
-          owner_email: z.string().email({ message: "Invalid email" }),
+          owner_name: z.string({ required_error: "owner_name is required" }),
+          owner_email: z
+            .string({ required_error: "nowner_email is required" })
+            .email({ message: "Invalid email" }),
           emails_to_invite: z.array(
             z.string().email({ message: "Invalid email" })
           ),

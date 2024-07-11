@@ -19,7 +19,9 @@ export async function updateTrip(app: FastifyInstance) {
           ends_at: z.coerce.date(),
         }),
         params: z.object({
-          tripId: z.string().uuid(),
+          tripId: z
+            .string({ required_error: "tripId is required" })
+            .uuid({ message: "Invalid type tripId!" }),
         }),
       },
     },
