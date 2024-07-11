@@ -5,6 +5,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 
+import { ClientError } from "../error/client-error";
 import { prisma } from "../lib/prisma";
 
 dayjs.locale("pt-br");
@@ -36,7 +37,7 @@ export async function getParticipant(app: FastifyInstance) {
         },
       });
       if (!participant) {
-        throw new Error("participant not found");
+        throw new ClientError("participant not found");
       }
 
       return { participant };

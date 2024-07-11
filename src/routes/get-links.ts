@@ -5,6 +5,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 
+import { ClientError } from "../error/client-error";
 import { prisma } from "../lib/prisma";
 
 dayjs.locale("pt-br");
@@ -33,7 +34,7 @@ export async function getLinks(app: FastifyInstance) {
         },
       });
       if (!trip) {
-        throw new Error("Trip not found");
+        throw new ClientError("Trip not found");
       }
       return { links: trip.links };
     }

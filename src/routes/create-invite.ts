@@ -5,6 +5,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import nodemailer from "nodemailer";
 import z from "zod";
+import { ClientError } from "../error/client-error";
 import { getMailClient } from "../lib/mail";
 import { prisma } from "../lib/prisma";
 
@@ -35,7 +36,7 @@ export async function createInvite(app: FastifyInstance) {
         },
       });
       if (!trip) {
-        throw new Error("Trip not found");
+        throw new ClientError("Trip not found");
       }
 
       const participant = await prisma.pacticipant.create({
