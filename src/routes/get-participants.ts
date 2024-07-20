@@ -39,4 +39,3 @@ export async function getParticipants(app: FastifyInstance) {
     }
   );
 }
-  
