@@ -1,16 +1,8 @@
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import { FastifyInstance } from "fastify";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
-import z from "zod";
-
+import type { FastifyInstance } from "fastify";
+import type { ZodTypeProvider } from "fastify-type-provider-zod";
+import { z } from "zod";
 import { ClientError } from "../error/client-error";
 import { prisma } from "../lib/prisma";
-
-dayjs.locale("pt-br");
-
-dayjs.extend(localizedFormat);
 
 export async function getParticipants(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
@@ -26,9 +18,7 @@ export async function getParticipants(app: FastifyInstance) {
       const { tripId } = request.params;
 
       const trip = await prisma.trip.findUnique({
-        where: {
-          id: tripId,
-        },
+        where: { id: tripId },
         include: {
           pacticipants: {
             select: {
@@ -40,11 +30,13 @@ export async function getParticipants(app: FastifyInstance) {
           },
         },
       });
+
       if (!trip) {
         throw new ClientError("Trip not found");
       }
 
-      return { particpants: trip.pacticipants };
+      return { participants: trip.pacticipants };
     }
   );
 }
+  
