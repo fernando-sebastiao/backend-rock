@@ -79,6 +79,13 @@ export async function createTrip(app: FastifyInstance) {
             },
           },
         },
+        select: {
+          id: true,
+          destination: true,
+          starts_at: true,
+          ends_at: true,
+          pacticipants: true,
+        },
       });
 
       const formateStartDate = dayjs(starts_at).format("LL");
@@ -111,7 +118,8 @@ export async function createTrip(app: FastifyInstance) {
 `.trim(),
       });
       console.log(nodemailer.getTestMessageUrl(message));
-      return { trip: trip.id };
+      console.log(trip.id);
+      return { tripId: trip.id };
     }
   );
 }
